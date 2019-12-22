@@ -1,14 +1,26 @@
-function WordCounter({ text, targetWordCount }) {
-  const wordCount = countWords(text);
-  const progress = wordCount / targetWordCount;
+class WordCounter extends React.Component {
+  state = {
+    text: 'Count the words in here.',
+  };
 
-  return (
-    <form className="measure pa4 sans-serif">
-      <Editor text={text} />
-      <Counter count={wordCount} />
-      <ProgressBar completion={progress} />
-    </form>
-  );
+  handleTextChange = currentText => {
+    this.setState(() => ({ text: currentText }));
+  };
+
+  render() {
+    const { targetWordCount } = this.props;
+    const { text } = this.state;
+    const wordCount = countWords(text);
+    const progress = wordCount / targetWordCount;
+
+    return (
+      <form className="measure pa4 sans-serif">
+        <Editor text={text} onTextChange={this.handleTextChange} />
+        <Counter count={wordCount} />
+        <ProgressBar completion={progress} />
+      </form>
+    );
+  }
 }
 
 function countWords(text) {
@@ -50,6 +62,6 @@ function Counter({ count }) {
 }
 
 ReactDOM.render(
-  <WordCounter text="Count the words in here." targetWordCount={10} />,
+  <WordCounter targetWordCount={10} />,
   document.getElementById('app'),
 );
