@@ -1,3 +1,70 @@
+const SUCCESS = 'SUCCESS';
+const FAILURE = 'FAILURE';
+const WAITING = 'WAITING';
+const IDLE = 'IDLE';
+
+function makeFakeRequest() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (Math.random() > 0.5) {
+        resolve('Success!');
+      } else {
+        reject('Failure');
+      }
+    }, 500);
+  });
+}
+
+function SaveButton({ onClick }) {
+  return (
+    <button className="pv2 ph3" onClick={onClick}>
+      Save
+    </button>
+  );
+}
+
+function AlertBox({ status }) {
+  if (status === FAILURE) {
+    return <div className="mv2">Save failed</div>;
+  } else if (status === SUCCESS) {
+    return <div className="mv2">Save successful</div>;
+  } else if (status === WAITING) {
+    return <div className="mv2">Saving…</div>;
+  } else {
+    return null;
+  }
+}
+
+class SaveManager extends React.Component {
+  state = {
+    saveStatus: IDLE,
+  };
+
+  save = event => {
+    event.preventDefault();
+
+    this.setState(() => ({ saveStatus: WAITING }));
+
+    this.props.saveFunction().then(
+      () => this.setState(() => ({ saveStatus: SUCCESS })),
+      () => this.setState(() => ({ saveStatus: FAILURE })),
+    );
+  };
+
+  render() {
+    return (
+      <div>
+        <SaveButton onClick={this.save} />
+        <AlertBox status={this.state.saveStatus} />
+      </div>
+    );
+  }
+}
+
+function countWords(text) {
+  return text ? text.match(/\w+/g).length : 0;
+}
+
 class WordCounter extends React.Component {
   state = {
     text: 'Count the words in here.',
@@ -18,13 +85,10 @@ class WordCounter extends React.Component {
         <Editor text={text} onTextChange={this.handleTextChange} />
         <Counter count={wordCount} />
         <ProgressBar completion={progress} />
+        <SaveManager saveFunction={makeFakeRequest} />
       </form>
     );
   }
-}
-
-function countWords(text) {
-  return text ? text.match(/\w+/g).length : 0;
 }
 
 function Editor({ text, onTextChange }) {
@@ -42,6 +106,10 @@ function Editor({ text, onTextChange }) {
   );
 }
 
+function Counter({ count }) {
+  return <p className="mb2">Word count: {count}</p>;
+}
+
 function ProgressBar({ completion }) {
   const percentage = completion * 100;
 
@@ -55,10 +123,6 @@ function ProgressBar({ completion }) {
       </progress>
     </div>
   );
-}
-
-function Counter({ count }) {
-  return <p className="mb2">Word count: {count}</p>;
 }
 
 ReactDOM.render(
