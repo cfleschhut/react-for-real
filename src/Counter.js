@@ -1,7 +1,11 @@
 import React from 'react';
 
 function Counter({ count }) {
-  return <p className="mb2">Word count: {count}</p>;
+  return (
+    <label htmlFor="count" className="mb2">
+      Word count: <output id="count">{count}</output>
+    </label>
+  );
 }
 
 export default Counter;
