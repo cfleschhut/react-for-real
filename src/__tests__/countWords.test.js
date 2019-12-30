@@ -1,4 +1,4 @@
-import countWords from '../countWords';
+import countWords from '../components/WordCounter/countWords';
 
 describe('the counting function', () => {
   it('counts the correct number of words', () => {

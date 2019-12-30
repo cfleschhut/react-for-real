@@ -1,6 +1,6 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
-import Counter from '../Counter';
+import Counter from '../components/WordCounter/Counter';
 
 describe('A counter', () => {
   it('Displays the count and a label', () => {

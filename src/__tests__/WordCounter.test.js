@@ -4,11 +4,11 @@ import Adapter from 'enzyme-adapter-react-16';
 
 configure({ adapter: new Adapter() });
 
-import WordCounter from '../WordCounter';
-import countWords from '../countWords';
-import Editor from '../Editor';
-import Counter from '../Counter';
-import ProgressBar from '../ProgressBar';
+import WordCounter from '../components/WordCounter/WordCounter';
+import countWords from '../components/WordCounter/countWords';
+import Editor from '../components/WordCounter/Editor';
+import Counter from '../components/WordCounter/Counter';
+import ProgressBar from '../components/WordCounter/ProgressBar';
 
 describe('When I type some words', () => {
   const target = 10;
