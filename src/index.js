@@ -20,6 +20,7 @@ const movieLists = ['Monday', 'Tuesday'].map(date => (
 ReactDOM.render(
   <>
     <WordCounter targetWordCount={10} />
+
     <Provider store={store}>
       <main className="ph6 pv4 sans-serif">
         <h1 className="mt0">Programme</h1>

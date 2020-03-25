@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Editor from './Editor';
 import Counter from './Counter';
 import ProgressBar from './ProgressBar';
@@ -6,7 +6,7 @@ import SaveManager from './SaveManager';
 import countWords from './countWords';
 import makeFakeRequest from './makeFakeRequest';
 
-class WordCounter extends React.Component {
+class WordCounter extends Component {
   state = {
     text: 'Count the words in here.',
   };

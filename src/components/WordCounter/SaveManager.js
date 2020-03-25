@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { Component } from 'react';
 import SaveButton from './SaveButton';
 import AlertBox from './AlertBox';
 import { SUCCESS, FAILURE, WAITING, IDLE } from './saveStatus';
 
-class SaveManager extends React.Component {
+class SaveManager extends Component {
   state = {
     saveStatus: IDLE,
   };
