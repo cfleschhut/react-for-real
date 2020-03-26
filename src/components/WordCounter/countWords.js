@@ -1,5 +1,6 @@
 function countWords(text) {
-  return text ? text.match(/\w+/g).length : 0;
+  const words = text.match(/\w+/g);
+  return text ? (words ? words.length : 0) : 0;
 }
 
 export default countWords;

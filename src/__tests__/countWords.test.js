@@ -8,4 +8,8 @@ describe('the counting function', () => {
   it('counts an empty string', () => {
     expect(countWords('')).toBe(0);
   });
+
+  it('counts non-word characters', () => {
+    expect(countWords('!')).toBe(0);
+  });
 });
